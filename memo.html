@@ -1,50 +1,48 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>웹 메모장</title>
-    <style>
-        body {
-            margin: 0;
-            background: #f4f4f4;
-            font-family: Arial, sans-serif;
-        }
+<meta charset="UTF-8">
+<title>Text Page</title>
 
-        header {
-            background: #333;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            font-size: 18px;
-        }
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-        textarea {
-            width: 100%;
-            height: calc(100vh - 50px);
-            border: none;
-            resize: none;
-            padding: 15px;
-            font-size: 16px;
-            outline: none;
-            box-sizing: border-box;
-        }
-    </style>
+<style>
+body{
+    background:white;
+    color:black;
+    font-family: monospace;
+    max-width:800px;
+    margin:50px auto;
+    line-height:1.6;
+}
+</style>
+
 </head>
 <body>
 
-<header>📒 웹 메모장</header>
-<textarea id="memo" placeholder="여기에 자유롭게 입력하세요..."></textarea>
+<div id="content"></div>
 
 <script>
-    const textarea = document.getElementById("memo");
+const markdownText = `
+# 사이트 제목
 
-    // 저장된 내용 불러오기
-    textarea.value = localStorage.getItem("memoData") || "";
+이 사이트는 **글만 표시되는 사이트**입니다.
 
-    // 입력할 때마다 자동 저장
-    textarea.addEventListener("input", () => {
-        localStorage.setItem("memoData", textarea.value);
-    });
+## 기능
+- 마크다운 지원
+- 이미지 없음
+- 이모지 없음
+
+### 코드 예시
+
+\`\`\`csharp
+Console.WriteLine("Hello World");
+\`\`\`
+
+끝.
+`;
+
+document.getElementById("content").innerHTML = marked.parse(markdownText);
 </script>
 
 </body>
